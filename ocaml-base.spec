@@ -1,6 +1,6 @@
 Name:           ocaml-base
 Version:       	0.11.1
-Release:        0.0%{?dist}
+Release:        0.1%{?dist}
 Summary:        Standard library for OCaml
 
 %global libname %(echo %{name} | sed -e 's/^ocaml-//')
@@ -41,10 +41,9 @@ sed 's/ocamlopt/ocamlopt -g/g' -i Makefile
 
 %install
 # Currently base installs itself with ocamlfind.
-export DESTDIR=%{buildroot}
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
-make install PREFIX=$OCAMLFIND_DESTDIR
+dune install --prefix=$OCAMLFIND_DESTDIR --libdir=$OCAMLFID_DESTDIR
 
 %files
 %doc README.org
@@ -70,5 +69,8 @@ make install PREFIX=$OCAMLFIND_DESTDIR
 %endif
 
 %changelog
+* Sat Aug  3 2019 Lucas Bickel <hairmare@rabe.ch> - 0.11.1-0.1
+- Fix building with dune vs. jbuilder
+
 * Sun Nov 11 2018 Lucas Bickel <hairmare@rabe.ch> - 0.11.1-0.0
 - Initial build for pcre-ocaml package bump
