@@ -1,19 +1,18 @@
 Name:           ocaml-base
-Version:       	0.11.1
-Release:        0.2%{?dist}
+Version:        0.12.2
+Release:        0.0%{?dist}
 Summary:        Standard library for OCaml
 
 %global libname %(echo %{name} | sed -e 's/^ocaml-//')
 
-# NOTE: The license changes to MIT at some point after the 0.11.1 tag
-License:        Apache-2.0
+License:        MIT
 URL:            https://github.com/janestreet/base/
 Source0:        https://github.com/janestreet/base/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-sexplib0-devel
-BuildRequires:	ocaml-dune
+BuildRequires:  ocaml-dune
 
 %description
 A Part of Jane Street's Core library The Core suite of libraries is
@@ -32,10 +31,6 @@ files for developing applications that use %{name}.
 %prep
 %autosetup -n %{libname}-%{version}
 
-# Generate debuginfo, or try to.
-sed 's/ocamlc/ocamlc -g/g' -i Makefile
-sed 's/ocamlopt/ocamlopt -g/g' -i Makefile
-
 %build
 %make_build
 
@@ -48,7 +43,7 @@ dune install --prefix=$OCAMLFIND_DESTDIR --libdir=$OCAMLFIND_DESTDIR
 %files
 %doc README.org
 %doc %{_libdir}/ocaml/doc/%{libname}
-%license LICENSE.txt
+%license LICENSE.md
 %{_libdir}/ocaml/%{libname}
 %{_libdir}/ocaml/stublibs/dll%{libname}_stubs.so
 %ifarch %{ocaml_native_compiler}
@@ -60,7 +55,7 @@ dune install --prefix=$OCAMLFIND_DESTDIR --libdir=$OCAMLFIND_DESTDIR
 %endif
 
 %files devel
-%license LICENSE.txt
+%license LICENSE.md
 %ifarch %{ocaml_native_compiler}
 %{_libdir}/ocaml/%{libname}/*.a
 %{_libdir}/ocaml/%{libname}/*.cmxa
@@ -69,6 +64,10 @@ dune install --prefix=$OCAMLFIND_DESTDIR --libdir=$OCAMLFIND_DESTDIR
 %endif
 
 %changelog
+* Fri Dec 13 2019 Lucas Bickel <hairmare@rabe.ch> - 0.12.2-0.0
+- Bump to 0.12.2
+- Switch to MIT license
+
 * Sun Dec  8 2019 Lucas Bickel <hairmare@rabe.ch> - 0.11.1-0.2
 - Fix libdir env variable
 - Use ocaml-dune instead of jbuilder
