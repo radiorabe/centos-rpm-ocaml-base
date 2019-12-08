@@ -1,6 +1,6 @@
 Name:           ocaml-base
 Version:       	0.11.1
-Release:        0.1%{?dist}
+Release:        0.2%{?dist}
 Summary:        Standard library for OCaml
 
 %global libname %(echo %{name} | sed -e 's/^ocaml-//')
@@ -13,7 +13,7 @@ Source0:        https://github.com/janestreet/base/archive/v%{version}/%{name}-%
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-sexplib0-devel
-BuildRequires:	jbuilder
+BuildRequires:	ocaml-dune
 
 %description
 A Part of Jane Street's Core library The Core suite of libraries is
@@ -43,7 +43,7 @@ sed 's/ocamlopt/ocamlopt -g/g' -i Makefile
 # Currently base installs itself with ocamlfind.
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
-dune install --prefix=$OCAMLFIND_DESTDIR --libdir=$OCAMLFID_DESTDIR
+dune install --prefix=$OCAMLFIND_DESTDIR --libdir=$OCAMLFIND_DESTDIR
 
 %files
 %doc README.org
@@ -69,6 +69,10 @@ dune install --prefix=$OCAMLFIND_DESTDIR --libdir=$OCAMLFID_DESTDIR
 %endif
 
 %changelog
+* Sun Dec  8 2019 Lucas Bickel <hairmare@rabe.ch> - 0.11.1-0.2
+- Fix libdir env variable
+- Use ocaml-dune instead of jbuilder
+
 * Sat Aug  3 2019 Lucas Bickel <hairmare@rabe.ch> - 0.11.1-0.1
 - Fix building with dune vs. jbuilder
 
