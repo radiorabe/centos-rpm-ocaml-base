@@ -12,7 +12,7 @@ Source0:        https://github.com/janestreet/base/archive/v%{version}/%{name}-%
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-sexplib0-devel
-BuildRequires:  ocaml-dune
+BuildRequires:  ocaml-dune-devel
 
 %description
 A Part of Jane Street's Core library The Core suite of libraries is
