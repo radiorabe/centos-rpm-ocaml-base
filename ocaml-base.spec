@@ -1,6 +1,6 @@
 Name:           ocaml-base
-Version:        0.12.2
-Release:        0.0%{?dist}
+Version:        0.13.1
+Release:        0.1%{?dist}
 Summary:        Standard library for OCaml
 
 %global libname %(echo %{name} | sed -e 's/^ocaml-//')
@@ -46,6 +46,7 @@ dune install --prefix=$OCAMLFIND_DESTDIR --libdir=$OCAMLFIND_DESTDIR
 %license LICENSE.md
 %{_libdir}/ocaml/%{libname}
 %{_libdir}/ocaml/stublibs/dll%{libname}_stubs.so
+%{_libdir}/ocaml/stublibs/dll%{libname}_internalhash_types_stubs.so
 %ifarch %{ocaml_native_compiler}
 %exclude %{_libdir}/ocaml/%{libname}/*.a
 %exclude %{_libdir}/ocaml/%{libname}/*.cmxa
@@ -64,6 +65,9 @@ dune install --prefix=$OCAMLFIND_DESTDIR --libdir=$OCAMLFIND_DESTDIR
 %endif
 
 %changelog
+* Sat May  2 2020 Lucas Bickel <hairmare@rabe.ch> - 0.13.1-0.1
+- Bump to 0.13.1
+
 * Fri Dec 13 2019 Lucas Bickel <hairmare@rabe.ch> - 0.12.2-0.0
 - Bump to 0.12.2
 - Switch to MIT license
